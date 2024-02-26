@@ -116,7 +116,6 @@ h1 {
 footer {
     background-color: #242424;
     color: #fff;
-    height: 100px;
     width: 100%;
     text-align: center;
     padding: 10px;
@@ -128,4 +127,10 @@ footer a {
     color: #fff;
     padding-right: 15px;
     text-decoration: none !important;
+}
+
+@media (max-width: 600px) {
+    footer {
+        padding: 5px;
+    }
 }

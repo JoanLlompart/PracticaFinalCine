@@ -1,0 +1,48 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+.parrafos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.parrafo3,
+.parrafo4,
+.parrafo5 {
+    flex: 1;
+    max-width: 300px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.parrafos div {
+    text-align: left;
+}
+
+footer {
+    background-color: #242424;
+    color: #fff;
+    height: auto;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+}
+
+footer a {
+    color: #fff;
+    padding-right: 15px;
+    text-decoration: none !important;
+}
+
+@media screen and (max-width: 600px) {
+    .parrafos {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+}
