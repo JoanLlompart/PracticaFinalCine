@@ -34,7 +34,7 @@ async function fetchMovies() {
             movieCard.appendChild(image);
             movieCard.appendChild(title);
             movieCard.appendChild(genre);
-            //movieCard.appendChild(description);
+            movieCard.appendChild(description);
 
             movieContainer.appendChild(movieCard);
         });
