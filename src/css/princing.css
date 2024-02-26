@@ -1,0 +1,114 @@
+* {
+    margin: 0%;
+    padding: 0%;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 5%;
+}
+
+.subtitle {
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#tabla-precios {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.precio-col {
+    background-color: #f3f3f3;
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    box-shadow: 0px 2px 5px #ddd;
+}
+
+.precio-col-header {
+    background-color: #333;
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px
+}
+
+.precio-col:nth-child(2) .precio-col-header {
+    background-color: #dd9933
+}
+
+.precio-col-header h3 {
+    color: #f3f3f3;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 0
+}
+
+.precio-col-header p {
+    text-align: center;
+    color: #f3f3f3;
+    font-size: 14px;
+    margin-bottom: 0
+}
+
+.precio-col-features {
+    padding: 0 20px 20px 20px
+}
+
+.precio-col-features p {
+    padding: 20px 0;
+    margin: 0;
+    text-align: center !important;
+    border-top: 1px solid #ddd
+}
+
+.precio-col-features p:first-child,
+.precio-col-features p:last-child {
+    border-top: none
+}
+
+.precio-col-comprar {
+    padding: 10px;
+    max-width: 250px;
+    text-align: center;
+    background-color: #dd9933;
+    margin: 0 auto 20px;
+    border-radius: 10px;
+    border: 2px solid #dd9933;
+    transition: all 0.3s
+}
+
+.precio-col-comprar a {
+    color: #f3f3f3;
+    padding: 10px;
+    font-size: 20px;
+    text-transform: uppercase;
+    transition: all 0.3s
+}
+
+.precio-col-comprar:hover {
+    background-color: #f3f3f3;
+    transition: all 0.3s
+}
+
+.precio-col-comprar:hover a {
+    color: #dd9933;
+    transition: all 0.3s
+}
+
+@media screen and (min-width:768px) {
+    .precio-col {
+        width: 32%;
+        float: left;
+        margin-right: 2%
+    }
+
+    .precio-col:last-child {
+        margin-right: 0
+    }
+}
