@@ -17,38 +17,47 @@ async function fetchMovies() {
         movies.forEach(async movie => {
             const movieCard = document.createElement('div');
             movieCard.classList.add('movie-card');
-
+        
             const image = document.createElement('img');
             image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
             image.alt = movie.title;
-
+        
             const title = document.createElement('h2');
             title.textContent = movie.title;
-
+        
             const description = document.createElement('p');
             description.textContent = truncateDescription(movie.overview, 100);
-
+        
             const genre = document.createElement('h3');
             genre.textContent = 'Género: ' + await getGenreNames(movie.genre_ids);
             genre.classList.add('movie-card');
-            
+        
+            //const duration = document.createElement('p');
+            //duration.textContent = 'Duración: ' + movie.runtime + ' minutos';
+        
+            const rating = document.createElement('p');
+            rating.textContent = 'Valoración: ' + movie.vote_average;
+        
             const readMoreLink = document.createElement('a');
             readMoreLink.textContent = 'Leer más';
             readMoreLink.href = '#'; // Agrega aquí el enlace a la descripción completa
             readMoreLink.onclick = function() {
-              alert(movie.overview); // Muestra la descripción completa en una ventana emergente
-              return false; // Evita que el enlace redirija a una nueva página
+                alert(movie.overview); // Muestra la descripción completa en una ventana emergente
+                return false; // Evita que el enlace redirija a una nueva página
             };
-
+        
             description.appendChild(readMoreLink);
-
+        
             movieCard.appendChild(image);
             movieCard.appendChild(title);
+            movieCard.appendChild(rating);
             movieCard.appendChild(genre);
+            //movieCard.appendChild(duration);
             movieCard.appendChild(description);
-
+        
             movieContainer.appendChild(movieCard);
         });
+        
     } catch (error) {
         console.error('Error al obtener las películas:', error);
     }
