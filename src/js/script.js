@@ -26,10 +26,21 @@ async function fetchMovies() {
             title.textContent = movie.title;
 
             const description = document.createElement('p');
-            description.textContent = movie.overview;
+            description.textContent = truncateDescription(movie.overview, 100);
 
-            const genre = document.createElement('p');
+            const genre = document.createElement('h3');
             genre.textContent = 'Género: ' + await getGenreNames(movie.genre_ids);
+            genre.classList.add('movie-card');
+            
+            const readMoreLink = document.createElement('a');
+            readMoreLink.textContent = 'Leer más';
+            readMoreLink.href = '#'; // Agrega aquí el enlace a la descripción completa
+            readMoreLink.onclick = function() {
+              alert(movie.overview); // Muestra la descripción completa en una ventana emergente
+              return false; // Evita que el enlace redirija a una nueva página
+            };
+
+            description.appendChild(readMoreLink);
 
             movieCard.appendChild(image);
             movieCard.appendChild(title);
@@ -58,6 +69,14 @@ async function getGenreNames(genreIds) {
         console.error('Error al obtener los nombres de género:', error);
         return 'Desconocido';
     }
+}
+
+// Función para truncar la descripción a un número específico de caracteres
+function truncateDescription(description, maxLength) {
+  if (description.length > maxLength) {
+    return description.substring(0, maxLength) + '...';
+  }
+  return description;
 }
 
 // Llamar a la función para obtener las películas cuando la página se cargue

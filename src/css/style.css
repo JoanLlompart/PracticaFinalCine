@@ -14,6 +14,7 @@ body {
 h1 {
     text-align: center;
     margin-top: 20px;
+    font-weight: bold;
 }
 
 .movie-container {
@@ -22,13 +23,14 @@ h1 {
     justify-content: center;
     gap: 20px;
     padding: 20px;
+    width: 100%;
 }
 
 .movie-card {
     border: 1px solid #ccc;
     border-radius: 5px;
     overflow: hidden;
-    width: 200px;
+    width: 250px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     transition: transform 0.3s ease;
@@ -47,8 +49,16 @@ h1 {
 .movie-card h2 {
     font-size: 16px;
     margin: 10px;
+    font-weight: bold;
+    text-align: center;
 }
 
+.movie-card h3{
+    font-weight: bold;
+    font-size: 14px;
+    color: #050505;
+    padding: 5px;
+}
 .movie-card p {
     font-size: 14px;
     margin: 10px;
