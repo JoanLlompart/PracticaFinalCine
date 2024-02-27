@@ -73,11 +73,18 @@ async function displayMovieInfo(movieId) {
             <p style="font-size: 16px; color: #333; margin-top: 10px;"><strong>Descripción:</strong> ${movie.overview}</p>
             <p style="font-size: 14px; color: #333;"><strong>Género:</strong> ${await getGenreNames(movie.genres.map(genre => genre.id))}</p>
             <p style="font-size: 14px; color: #333;"><strong>Valoración:</strong> ${movie.vote_average}</p>
-            ${movie.videos?.results && movie.videos.results.length > 0 ?
-                `<p style="font-size: 14px; color: #666;"><strong>Trailer:</strong> <a href="https://www.youtube.com/watch?v=${movie.videos.results[0].key}" target="_blank">Ver Trailer</a></p>` :
-                '<p style="font-size: 14px; color: #666;">No se encontró trailer disponible</p>'
-            }
+            <div id="trailerPlayer"></div>
         `;
+
+        if (movie.videos?.results && movie.videos.results.length > 0) {
+            const trailerKey = movie.videos.results[0].key;
+            const trailerPlayer = document.getElementById('trailerPlayer');
+            trailerPlayer.innerHTML = `
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/${trailerKey}" frameborder="0" allowfullscreen></iframe>
+            `;
+        } else {
+            modalBody.innerHTML += '<p style="font-size: 14px; color: #666;">No se encontró trailer disponible</p>';
+        }
 
         $('#movieModal').modal('show'); // Muestra el modal
     } catch (error) {
