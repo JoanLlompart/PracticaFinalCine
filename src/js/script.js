@@ -83,7 +83,7 @@ async function displayMovieInfo(movieId) {
         console.error('Error al obtener la información de la película:', error);
     }
 }
-
+/*
 async function openTrailerModal(movieId) {
     try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`);
@@ -100,6 +100,32 @@ async function openTrailerModal(movieId) {
         console.error('Error al obtener el trailer de la película:', error);
     }
 }
+*/
+// Función para abrir el modal y mostrar el trailer de la película en un iframe
+async function openTrailerModal(movieId) {
+    try {
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`);
+        const data = await response.json();
+
+        if (data.results && data.results.length > 0) {
+            const trailerKey = data.results[0].key;
+            const trailerUrl = `https://www.youtube.com/embed/${trailerKey}`;
+
+            const modalBody = document.querySelector('#movieModalBody');
+
+            modalBody.innerHTML += `
+                <iframe width="100%" height="315" src="${trailerUrl}" frameborder="0" allowfullscreen></iframe>
+            `;
+
+            $('#movieModal').modal('show'); // Muestra el modal
+        } else {
+            console.error('No se encontraron trailers para esta película.');
+        }
+    } catch (error) {
+        console.error('Error al obtener el trailer de la película:', error);
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
     fetchMovies();
