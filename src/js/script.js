@@ -1,7 +1,5 @@
-// JavaScript para consumir la API y mostrar las imágenes de las películas
-const apiKey = '94b49414abe2bf22eaea7d2de2623815'; // Reemplaza 'TU_API_KEY' con tu clave de API
+const apiKey = '94b49414abe2bf22eaea7d2de2623815';
 
-// Función para obtener las imágenes de películas de la API
 async function fetchMovies() {
     try {
         const response = await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=es`);
@@ -9,11 +7,8 @@ async function fetchMovies() {
         const movies = data.results;
 
         const movieContainer = document.getElementById('movie-container');
-
-        // Limpiar el contenedor antes de agregar nuevas películas
         movieContainer.innerHTML = '';
 
-        // Iterar sobre las películas y crear tarjetas para cada una
         movies.forEach(movie => {
             const movieCard = document.createElement('div');
             movieCard.classList.add('movie-card');
@@ -21,26 +16,25 @@ async function fetchMovies() {
             const image = document.createElement('img');
             image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
             image.alt = movie.title;
-            image.setAttribute('data-trailer-id', movie.id); // Agregar el ID del trailer como atributo de datos
+            image.dataset.trailerId = movie.id; // Utilizar dataset en lugar de setAttribute
 
-            // Agregar evento de clic a la imagen
             image.addEventListener('click', () => {
-                const trailerId = image.getAttribute('data-trailer-id');
-                openTrailerModal(trailerId);
+                const trailerId = image.dataset.trailerId; // Utilizar dataset para obtener el valor
+                displayMovieInfo(trailerId);
             });
 
             const title = document.createElement('h2');
             title.textContent = movie.title;
+
             movieCard.appendChild(image);
             movieCard.appendChild(title);
             movieContainer.appendChild(movieCard);
         });
-
     } catch (error) {
         console.error('Error al obtener las películas:', error);
     }
 }
-// Función para obtener los nombres de género a partir de los identificadores de género
+
 async function getGenreNames(genreIds) {
     try {
         const response = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=es`);
@@ -57,7 +51,6 @@ async function getGenreNames(genreIds) {
     }
 }
 
-// Función para mostrar la información de una película en el modal
 async function displayMovieInfo(movieId) {
     try {
         const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=es`);
@@ -85,48 +78,26 @@ async function displayMovieInfo(movieId) {
             modalBody.innerHTML += '<p style="font-size: 14px; color: #666;">No se encontró trailer disponible</p>';
         }
 
-        $('#movieModal').modal('show'); // Muestra el modal
+        $('#movieModal').modal('show');
     } catch (error) {
         console.error('Error al obtener la información de la película:', error);
     }
 }
+
 async function openTrailerModal(movieId) {
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=es`);
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`);
         const data = await response.json();
 
         if (data.results && data.results.length > 0) {
-            const trailerList = data.results.filter(video => video.type === "Trailer");
-            
-            if (trailerList.length > 0) {
-                const modalBody = document.querySelector('#movieModalBody');
-                modalBody.innerHTML = '<h4>Selecciona un tráiler:</h4>';
-
-                const trailerPlayer = document.createElement('div');
-                trailerPlayer.classList.add('trailer-player');
-
-                trailerList.forEach(trailer => {
-                    const trailerButton = document.createElement('button');
-                    trailerButton.textContent = trailer.name;
-                    trailerButton.addEventListener('click', () => {
-                        const trailerKey = trailer.key;
-                        const trailerUrl = `https://www.youtube.com/watch?v=${trailerKey}`;
-                        window.open(trailerUrl, '_blank');
-                    });
-                    trailerPlayer.appendChild(trailerButton);
-                });
-
-                modalBody.appendChild(trailerPlayer);
-
-                $('#movieModal').modal('show'); // Muestra el modal
-            } else {
-                console.error('No se encontraron tráilers para esta película.');
-            }
+            const trailerKey = data.results[0].key;
+            const trailerUrl = `https://www.youtube.com/watch?v=${trailerKey}`;
+            window.open(trailerUrl, '_blank');
         } else {
-            console.error('No se encontraron videos para esta película.');
+            console.error('No se encontraron trailers para esta película.');
         }
     } catch (error) {
-        console.error('Error al obtener los videos de la película:', error);
+        console.error('Error al obtener el trailer de la película:', error);
     }
 }
 
@@ -135,8 +106,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const showTrailerBtn = document.getElementById('showTrailerBtn');
     showTrailerBtn.addEventListener('click', function () {
-        const firstMovieCard = document.querySelector('.movie-card');
-        const movieId = firstMovieCard.getAttribute('data-trailer-id');
+        const movieId = document.querySelector('.movie-card img').dataset.trailerId; // Obtener el ID de la primera película
         openTrailerModal(movieId);
     });
 });
