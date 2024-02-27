@@ -30,38 +30,9 @@ async function fetchMovies() {
             });
 
             const title = document.createElement('h2');
-            title.textContent = movie.title;
-        
-            const description = document.createElement('p');
-            description.textContent = truncateDescription(movie.overview, 100);
-        
-            const genre = document.createElement('h3');
-            genre.textContent = 'Género: ' + await getGenreNames(movie.genre_ids);
-            genre.classList.add('movie-card');
-        
-            //const duration = document.createElement('p');
-            //duration.textContent = 'Duración: ' + movie.runtime + ' minutos';
-        
-            const rating = document.createElement('p');
-            rating.textContent = 'Valoración: ' + movie.vote_average;
-        
-            const readMoreLink = document.createElement('a');
-            readMoreLink.textContent = 'Leer más';
-            readMoreLink.href = '#'; // Agrega aquí el enlace a la descripción completa
-            readMoreLink.onclick = function() {
-                alert(movie.overview); // Muestra la descripción completa en una ventana emergente
-                return false; // Evita que el enlace redirija a una nueva página
-            };
-        
-            description.appendChild(readMoreLink);
-        
+            title.textContent = movie.title;        
             movieCard.appendChild(image);
             movieCard.appendChild(title);
-            movieCard.appendChild(rating);
-            movieCard.appendChild(genre);
-            //movieCard.appendChild(duration);
-            movieCard.appendChild(description);
-        
             movieContainer.appendChild(movieCard);
         });
         
@@ -87,13 +58,6 @@ async function getGenreNames(genreIds) {
     }
 }
 
-// Función para truncar la descripción a un número específico de caracteres
-function truncateDescription(description, maxLength) {
-  if (description.length > maxLength) {
-    return description.substring(0, maxLength) + '...';
-  }
-  return description;
-}
 // Función para mostrar la información de una película en el modal
 async function displayMovieInfo(movieId) {
     try {

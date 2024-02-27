@@ -10,16 +10,18 @@ h1 {
 
 .subtitle {
     text-align: center;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 #tabla-precios {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    margin-top: 50px;
+    justify-content: center; 
+    align-items: center; 
+    padding: 15px;
 }
+
 
 .precio-col {
     background-color: #f3f3f3;
@@ -38,10 +40,10 @@ h1 {
 }
 
 .precio-col:nth-child(2) .precio-col-header {
-    background-color: #dd9933
+    background-color: #6d4b18
 }
 
-.precio-col-header h3 {
+.precio-col-header h1 {
     color: #f3f3f3;
     text-align: center;
     font-size: 30px;
