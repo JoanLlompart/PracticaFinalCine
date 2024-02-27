@@ -17,7 +17,7 @@ async function fetchMovies() {
         movies.forEach(async movie => {
             const movieCard = document.createElement('div');
             movieCard.classList.add('movie-card');
-        
+
             const image = document.createElement('img');
             image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
             image.alt = movie.title;
@@ -30,12 +30,12 @@ async function fetchMovies() {
             });
 
             const title = document.createElement('h2');
-            title.textContent = movie.title;        
+            title.textContent = movie.title;
             movieCard.appendChild(image);
             movieCard.appendChild(title);
             movieContainer.appendChild(movieCard);
         });
-        
+
     } catch (error) {
         console.error('Error al obtener las películas:', error);
     }
@@ -70,12 +70,12 @@ async function displayMovieInfo(movieId) {
         const modalBody = document.querySelector('#movieModalBody');
         modalBody.innerHTML = `
             <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" class="img-fluid">
-            <p><strong>Descripción:</strong> ${movie.overview}</p>
-            <p><strong>Género:</strong> ${await getGenreNames(movie.genres.map(genre => genre.id))}</p>
-            <p><strong>Valoración:</strong> ${movie.vote_average}</p>
+            <p style="font-size: 16px; color: #333; margin-top: 10px;"><strong>Descripción:</strong> ${movie.overview}</p>
+            <p style="font-size: 14px; color: #333;"><strong>Género:</strong> ${await getGenreNames(movie.genres.map(genre => genre.id))}</p>
+            <p style="font-size: 14px; color: #333;"><strong>Valoración:</strong> ${movie.vote_average}</p>
             ${movie.videos?.results && movie.videos.results.length > 0 ?
-                `<p><strong>Trailer:</strong> <a href="https://www.youtube.com/watch?v=${movie.videos.results[0].key}" target="_blank">Ver Trailer</a></p>` :
-                '<p>No se encontró trailer disponible</p>'
+                `<p style="font-size: 14px; color: #666;"><strong>Trailer:</strong> <a href="https://www.youtube.com/watch?v=${movie.videos.results[0].key}" target="_blank">Ver Trailer</a></p>` :
+                '<p style="font-size: 14px; color: #666;">No se encontró trailer disponible</p>'
             }
         `;
 

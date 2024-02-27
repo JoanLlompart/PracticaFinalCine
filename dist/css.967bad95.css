@@ -3,7 +3,7 @@
     padding: 0%;
 }
 
-h1 {
+.information h1 {
     text-align: center;
     padding-top: 5%;
 }
@@ -12,6 +12,25 @@ h1 {
     text-align: center;
     padding-left: 30px;
     padding-right: 30px;
+}
+
+.parrafos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.parrafo3,
+.parrafo4,
+.parrafo5 {
+    flex: 1;
+    max-width: 300px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.parrafos div {
+    text-align: left;
 }
 
 #tabla-precios {
@@ -74,33 +93,21 @@ h1 {
     border-top: none
 }
 
-.precio-col-comprar {
-    padding: 10px;
-    max-width: 250px;
+footer {
+    background-color: #242424;
+    color: #fff;
+    height: auto;
+    width: 100%;
     text-align: center;
-    background-color: #dd9933;
-    margin: 0 auto 20px;
-    border-radius: 10px;
-    border: 2px solid #dd9933;
-    transition: all 0.3s
-}
-
-.precio-col-comprar a {
-    color: #f3f3f3;
     padding: 10px;
-    font-size: 20px;
-    text-transform: uppercase;
-    transition: all 0.3s
+    position: relative;
+    bottom: 0;
 }
 
-.precio-col-comprar:hover {
-    background-color: #f3f3f3;
-    transition: all 0.3s
-}
-
-.precio-col-comprar:hover a {
-    color: #dd9933;
-    transition: all 0.3s
+footer a {
+    color: #fff;
+    padding-right: 15px;
+    text-decoration: none !important;
 }
 
 @media screen and (min-width:768px) {
@@ -115,24 +122,13 @@ h1 {
     }
 }
 
-footer {
-    background-color: #242424;
-    color: #fff;
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-}
-
-footer a {
-    color: #fff;
-    padding-right: 15px;
-    text-decoration: none !important;
-}
-
-@media (max-width: 600px) {
-    footer {
-        padding: 5px;
+@media screen and (max-width: 600px) {
+    .parrafos {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
     }
 }
+
+
+/*# sourceMappingURL=/css.967bad95.css.map */
