@@ -17,7 +17,7 @@ async function fetchMovies() {
         movies.forEach(async movie => {
             const movieCard = document.createElement('div');
             movieCard.classList.add('movie-card');
-
+        
             const image = document.createElement('img');
             image.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
             image.alt = movie.title;
@@ -26,46 +26,45 @@ async function fetchMovies() {
             // Agregar evento de clic a la imagen
             image.addEventListener('click', () => {
                 const trailerId = image.getAttribute('data-trailer-id');
-                // Abrir ventana modal o reproducir el trailer
-                window.open(`https://www.youtube.com/watch?v=${trailerId}`, '_blank');
+                displayMovieInfo(trailerId);
             });
 
             const title = document.createElement('h2');
             title.textContent = movie.title;
-
+        
             const description = document.createElement('p');
             description.textContent = truncateDescription(movie.overview, 100);
-
+        
             const genre = document.createElement('h3');
             genre.textContent = 'Género: ' + await getGenreNames(movie.genre_ids);
             genre.classList.add('movie-card');
-
+        
             //const duration = document.createElement('p');
             //duration.textContent = 'Duración: ' + movie.runtime + ' minutos';
-
+        
             const rating = document.createElement('p');
             rating.textContent = 'Valoración: ' + movie.vote_average;
-
+        
             const readMoreLink = document.createElement('a');
             readMoreLink.textContent = 'Leer más';
             readMoreLink.href = '#'; // Agrega aquí el enlace a la descripción completa
-            readMoreLink.onclick = function () {
+            readMoreLink.onclick = function() {
                 alert(movie.overview); // Muestra la descripción completa en una ventana emergente
                 return false; // Evita que el enlace redirija a una nueva página
             };
-
+        
             description.appendChild(readMoreLink);
-
+        
             movieCard.appendChild(image);
             movieCard.appendChild(title);
             movieCard.appendChild(rating);
             movieCard.appendChild(genre);
             //movieCard.appendChild(duration);
             movieCard.appendChild(description);
-
+        
             movieContainer.appendChild(movieCard);
         });
-
+        
     } catch (error) {
         console.error('Error al obtener las películas:', error);
     }
@@ -90,20 +89,11 @@ async function getGenreNames(genreIds) {
 
 // Función para truncar la descripción a un número específico de caracteres
 function truncateDescription(description, maxLength) {
-    if (description.length > maxLength) {
-        return description.substring(0, maxLength) + '...';
-    }
-    return description;
+  if (description.length > maxLength) {
+    return description.substring(0, maxLength) + '...';
+  }
+  return description;
 }
-
-// Agrega un manejador de eventos click a las imágenes de las películas para abrir el modal con la información
-document.addEventListener('click', function (event) {
-    if (event.target.classList.contains('movie-img')) {
-        const movieId = event.target.dataset.movieId;
-        displayMovieInfo(movieId);
-    }
-});
-
 // Función para mostrar la información de una película en el modal
 async function displayMovieInfo(movieId) {
     try {
@@ -119,7 +109,10 @@ async function displayMovieInfo(movieId) {
             <p><strong>Descripción:</strong> ${movie.overview}</p>
             <p><strong>Género:</strong> ${await getGenreNames(movie.genres.map(genre => genre.id))}</p>
             <p><strong>Valoración:</strong> ${movie.vote_average}</p>
-            <p><strong>Trailer:</strong> <a href="https://www.youtube.com/watch?v=${movie.videos.results[0].key}" target="_blank">Ver Trailer</a></p>
+            ${movie.videos?.results && movie.videos.results.length > 0 ?
+                `<p><strong>Trailer:</strong> <a href="https://www.youtube.com/watch?v=${movie.videos.results[0].key}" target="_blank">Ver Trailer</a></p>` :
+                '<p>No se encontró trailer disponible</p>'
+            }
         `;
 
         $('#movieModal').modal('show'); // Muestra el modal
@@ -127,6 +120,7 @@ async function displayMovieInfo(movieId) {
         console.error('Error al obtener la información de la película:', error);
     }
 }
+
 
 // Llamar a la función para obtener las películas cuando la página se cargue
 document.addEventListener('DOMContentLoaded', fetchMovies);
