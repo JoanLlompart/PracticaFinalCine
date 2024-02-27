@@ -4,6 +4,7 @@
 }
 
 .information h1 {
+    margin-top: 0;
     text-align: center;
     padding-top: 5%;
 }
@@ -45,7 +46,7 @@
 .precio-col {
     background-color: #f3f3f3;
     width: 100%;
-    max-width: 300px;
+    max-width: 350px;
     border-radius: 10px;
     margin-bottom: 50px;
     box-shadow: 0px 2px 5px #ddd;
@@ -111,7 +112,15 @@
     color: #f3f3f3;
 }
 
+.container{
+    margin-top: 0px;
+    border-radius: 5px;
+    margin-bottom: 40px;
+}
 
+.card-body{
+    background-color: #f3f3f3;
+}
 footer {
     background-color: #242424;
     color: #fff;
