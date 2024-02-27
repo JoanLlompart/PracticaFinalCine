@@ -36,8 +36,8 @@
 #tabla-precios {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center; 
-    align-items: center; 
+    justify-content: center;
+    align-items: center;
     padding: 15px;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .precio-col:nth-child(2) .precio-col-header {
-    background-color: #6d4b18
+    background-color: #6d4b18;
 }
 
 .precio-col-header h1 {
@@ -92,6 +92,25 @@
 .precio-col-features p:last-child {
     border-top: none
 }
+
+.PrecioBorder {
+    background-color: #242424;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 3px;
+}
+
+.PrecioBorder2 {
+    background-color: #6d4b18;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.Precio {
+    color: #f3f3f3;
+}
+
 
 footer {
     background-color: #242424;
