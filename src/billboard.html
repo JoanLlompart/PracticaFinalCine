@@ -8,6 +8,8 @@
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
   <title>Cartelera de Cine</title>
   <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+
   <link rel="stylesheet" href="css/billboard.css">
 </head>
 
@@ -70,6 +72,28 @@
 
   <h1>Cartelera de Cine</h1>
   <div class="movie-container" id="movie-container"></div>
+
+<!-- Modal para mostrar la información de la película -->
+<div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="movieModalLabel">Información de la Película</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="movieModalBody">
+        <!-- Aquí se mostrará la información de la película -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <footer>
     <p>@2024 Esta es Nuestra pagina Web. Todos los derechos reservados.</p>
     <div class="col item social">
