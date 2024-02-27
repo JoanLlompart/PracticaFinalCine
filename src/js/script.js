@@ -14,7 +14,7 @@ async function fetchMovies() {
         movieContainer.innerHTML = '';
 
         // Iterar sobre las películas y crear tarjetas para cada una
-        movies.forEach(async movie => {
+        movies.forEach(movie => {
             const movieCard = document.createElement('div');
             movieCard.classList.add('movie-card');
 
@@ -26,7 +26,7 @@ async function fetchMovies() {
             // Agregar evento de clic a la imagen
             image.addEventListener('click', () => {
                 const trailerId = image.getAttribute('data-trailer-id');
-                displayMovieInfo(trailerId);
+                openTrailerModal(trailerId);
             });
 
             const title = document.createElement('h2');
@@ -40,7 +40,6 @@ async function fetchMovies() {
         console.error('Error al obtener las películas:', error);
     }
 }
-
 // Función para obtener los nombres de género a partir de los identificadores de género
 async function getGenreNames(genreIds) {
     try {
@@ -91,39 +90,53 @@ async function displayMovieInfo(movieId) {
         console.error('Error al obtener la información de la película:', error);
     }
 }
-// Función para abrir el modal y mostrar el trailer de la película
 async function openTrailerModal(movieId) {
     try {
-        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=en-US`);
+        const response = await fetch(`https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}&language=es`);
         const data = await response.json();
 
         if (data.results && data.results.length > 0) {
-            const trailerKey = data.results[0].key;
-            const trailerUrl = `https://www.youtube.com/watch?v=${trailerKey}`;
+            const trailerList = data.results.filter(video => video.type === "Trailer");
+            
+            if (trailerList.length > 0) {
+                const modalBody = document.querySelector('#movieModalBody');
+                modalBody.innerHTML = '<h4>Selecciona un tráiler:</h4>';
 
-            // Abre el enlace en una nueva pestaña
-            window.open(trailerUrl, '_blank');
+                const trailerPlayer = document.createElement('div');
+                trailerPlayer.classList.add('trailer-player');
+
+                trailerList.forEach(trailer => {
+                    const trailerButton = document.createElement('button');
+                    trailerButton.textContent = trailer.name;
+                    trailerButton.addEventListener('click', () => {
+                        const trailerKey = trailer.key;
+                        const trailerUrl = `https://www.youtube.com/watch?v=${trailerKey}`;
+                        window.open(trailerUrl, '_blank');
+                    });
+                    trailerPlayer.appendChild(trailerButton);
+                });
+
+                modalBody.appendChild(trailerPlayer);
+
+                $('#movieModal').modal('show'); // Muestra el modal
+            } else {
+                console.error('No se encontraron tráilers para esta película.');
+            }
         } else {
-            console.error('No se encontraron trailers para esta película.');
+            console.error('No se encontraron videos para esta película.');
         }
     } catch (error) {
-        console.error('Error al obtener el trailer de la película:', error);
+        console.error('Error al obtener los videos de la película:', error);
     }
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
-    // Llamar a la función para obtener las películas cuando la página se cargue
     fetchMovies();
 
-    // Agregar evento de clic al botón para mostrar el trailer
     const showTrailerBtn = document.getElementById('showTrailerBtn');
     showTrailerBtn.addEventListener('click', function () {
-        const movieId = /* Obtener el ID de la película */
+        const firstMovieCard = document.querySelector('.movie-card');
+        const movieId = firstMovieCard.getAttribute('data-trailer-id');
         openTrailerModal(movieId);
     });
 });
-
-
-// Llamar a la función para obtener las películas cuando la página se cargue
-document.addEventListener('DOMContentLoaded', fetchMovies);
