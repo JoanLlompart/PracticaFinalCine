@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cartelera de Cine</title>
@@ -57,29 +58,54 @@
       <span class="sr-only">Next</span>
     </a>
   </div>
+  <div class="buttonSearch">
+    <label for="dateInput" style="color: rgb(0, 0, 0); font-size: 20px;">Fecha:</label>
+    <input type="date" id="dateInput">
+    <button id="searchByDateBtn">Buscar por Fecha</button>
+  </div>
+
 
   <h1>Cartelera de Cine</h1>
   <div class="movie-container" id="movie-container"></div>
 
-<!-- Modal para mostrar la información de la película -->
-<div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="movieModalLabel">Información de la Película</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="movieModalBody">
-        <!-- Aquí se mostrará la información de la película -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+  <!-- Modal para mostrar la información de la película -->
+  <div class="modal fade" id="movieModal" tabindex="-1" role="dialog" aria-labelledby="movieModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="movieModalLabel">Información de la Película</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="movieModalBody">
+          <!-- Aquí se mostrará la información de la película -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <!-- Nuevo botón para mostrar el trailer -->
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Modal para mostrar el trailer de la película -->
+  <div class="modal fade" id="trailerModal" tabindex="-1" role="dialog" aria-labelledby="trailerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="trailerModalLabel">Trailer de la Película</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="trailerModalBody">
+          <!-- Aquí se mostrará el trailer de la película -->
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <footer>
     <p>@2024 Esta es Nuestra pagina Web. Todos los derechos reservados.</p>
