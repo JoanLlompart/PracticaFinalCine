@@ -1,5 +1,5 @@
 /* Estilos CSS para dar formato a la página */
-*{
+* {
     margin: 0;
     padding: 0;
 }
@@ -9,6 +9,20 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 0;
+}
+
+.modal-dialog {
+    max-width: 80%;
+    width: 80%;
+}
+
+.image {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.information {
+    flex: 2;
 }
 
 h1 {
@@ -76,8 +90,43 @@ footer a {
     text-decoration: none !important;
 }
 
+#dateInput {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#searchByDateBtn {
+    margin-left: 15px;
+    padding: 10px;
+    background-color: #02274e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+#searchByDateBtn:hover{
+    background-color: #0079fa;
+}
+.buttonSearch{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
 @media (max-width: 600px) {
     footer {
         padding: 5px;
+    }
+
+    .modal-dialog {
+        max-width: 100%;
+        width: 100%;
+        margin: auto;
+        margin: 10px;
     }
 }
